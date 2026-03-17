@@ -6,7 +6,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
-import { auth, db } from '../../services/firebaseConnection';
+import { auth, db } from '../../../../services/firebaseConnection';
 import {
   FlatList,
   StyleSheet,
@@ -15,8 +15,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { UserList } from '../../components/userList';
-import { IUser } from '../../types/global';
+import { UserList } from '../../../../components/userList';
+import { IUser } from '../../../../types/global';
 import { signOut } from 'firebase/auth';
 
 export function FormUser() {

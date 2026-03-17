@@ -1,18 +1,23 @@
+import 'react-native-gesture-handler';
+
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar, useColorScheme } from 'react-native';
-import { FormLogin } from './src/page/FormLogin/FormLogin';
+import { enableScreens } from 'react-native-screens';
+import { BottomTabRoute } from './src/route/BottomTab';
+import { NavigationContainer } from '@react-navigation/native';
 
-/* import { FormUser } from './src/page/FormUser/FormUser'; */
+enableScreens();
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {/* <FormUser /> */}
-      <FormLogin />
+      <NavigationContainer>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <BottomTabRoute />
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }

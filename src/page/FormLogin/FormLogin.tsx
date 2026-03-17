@@ -15,7 +15,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FormUser } from '../FormUser/FormUser';
+import { FormUser } from './components/FormUser/FormUser';
 
 export function FormLogin() {
   const [email, setEmail] = useState('');
