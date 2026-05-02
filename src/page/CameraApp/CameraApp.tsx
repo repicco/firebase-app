@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import {
   ImageLibraryOptions,
   launchImageLibrary,
+  launchCamera,
+  CameraOptions,
 } from 'react-native-image-picker';
 
 export function CameraApp() {
   const [photo, setPhoto] = useState<string>('');
 
-  function openAlbum() {
+  const openAlbum = useCallback(() => {
     const options: ImageLibraryOptions = {
       mediaType: 'photo',
       quality: 1,
@@ -30,11 +32,31 @@ export function CameraApp() {
       console.log(response.assets);
       if (response.assets) {
         setPhoto(response.assets[0]?.uri ? response.assets[0].uri : '');
+        return;
       }
 
       console.error('Imagem não encontrada');
     });
-  }
+  }, []);
+
+  const openCamera = useCallback(async () => {
+    const options: CameraOptions = {
+      mediaType: 'photo',
+      quality: 1,
+      saveToPhotos: true,
+    };
+
+    const response = await launchCamera(options);
+
+    console.log(response.assets);
+
+    if (response.assets) {
+      setPhoto(response.assets[0]?.uri ? response.assets[0].uri : '');
+      return;
+    }
+
+    console.error('Imagem não encontrada');
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -43,7 +65,7 @@ export function CameraApp() {
           <Text style={styles.text}>Abrir album</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={openCamera}>
           <Text style={styles.text}>Abrir camera</Text>
         </TouchableOpacity>
       </View>
